@@ -3,9 +3,11 @@
 import { Color } from '@tiptap/extension-color'
 import ListItem from '@tiptap/extension-list-item'
 import TextStyle from '@tiptap/extension-text-style'
-import { EditorProvider, useCurrentEditor } from '@tiptap/react'
+import { useCurrentEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import React from 'react'
+
+import { useEditor, EditorContent } from '@tiptap/react'
 
 const MenuBar = () => {
   const { editor } = useCurrentEditor()
@@ -228,21 +230,29 @@ const extensions = [
 // </blockquote>
 // `
 
-import { useEditor, EditorContent } from '@tiptap/react'
 
-export default ({ content, onChange }: { content: any, onChange: (value: string) => void }) => {
+
+const RichTextEditor = ({
+  content,
+  onChange,
+}: {
+  content: any;
+  onChange: (value: string) => void;
+}) => {
   const editor = useEditor({
     extensions,
     content,
     onUpdate: ({ editor }) => {
-      onChange(editor.getHTML())
+      onChange(editor.getHTML());
     },
-  })
+  });
 
   return (
     <>
       <MenuBar />
       <EditorContent editor={editor} />
     </>
-  )
-}
+  );
+};
+
+export default RichTextEditor;

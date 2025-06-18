@@ -22,7 +22,7 @@ import {
   CarouselItem,
 } from "../ui/carousel";
 import { useForm } from "react-hook-form";
-import { createResponse, updateSingleChoiceResponse } from "@/lib/actions";
+//import { createResponse, updateSingleChoiceResponse } from "@/lib/actions";
 import { IDATAQUESTION, IQUESTION, IENUNCIADOPROPS } from "@/types/encuestas";
 import { User } from "next-auth";
 
@@ -103,10 +103,10 @@ export default function QuestionRadioField({
 
   const updateDatabase = async (value: any) => {
     if (values.responses.length > 0) {
-      const response = await updateSingleChoiceResponse(
-        value,
-        values.responses[0]?.singleChoice.id
-      );
+      // const response = await updateSingleChoiceResponse(
+      //   value,
+      //   values.responses[0]?.singleChoice.id
+      // );
       return;
     }
 
@@ -127,7 +127,7 @@ export default function QuestionRadioField({
       checkbox: {},
     };
 
-    const response = await createResponse(responseData);
+    //const response = await createResponse(responseData);
   };
 
   const answersHasTexts = singleChoiceResponse.some(
