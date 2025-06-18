@@ -11,13 +11,7 @@ export default function CloseSurvey({ encuesta }: { encuesta: any}) {
   }
 
   return (
-    <>
-      { encuesta && encuesta.isActive && (<Button
-        className="border  text-white py-2 font-bold rounded bg-[#087B38] hover:bg-[#087B38]"
-        onClick={() => handleModal()}
-      >
-        Finalizar cuestionario
-      </Button>)}
+    <>      
       <ModalCloseSurvey action={handleModal} open={openModal} encuesta={encuesta}/>
     </>
   );

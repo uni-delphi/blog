@@ -29,7 +29,7 @@ import {
   CarouselItem,
 } from "../ui/carousel";
 import { useForm } from "react-hook-form";
-import { createResponse, updateCheckboxResponse } from "@/lib/actions";
+// import { createResponse, updateCheckboxResponse } from "@/lib/actions";
 
 const formSchema = z.object({
   items: z.array(z.string()).max(3),
@@ -117,10 +117,10 @@ export default function QuestionCheckboxField({
 
   const updateDatabase = async (value: any) => {
     if (values.responses.length > 0) {
-      const response = await updateCheckboxResponse(
-        value,
-        values.responses[0]?.checkbox.id
-      );
+      // const response = await updateCheckboxResponse(
+      //   value,
+      //   values.responses[0]?.checkbox.id
+      // );
       return;
     }
 
@@ -141,7 +141,7 @@ export default function QuestionCheckboxField({
       },
     };
 
-    const response = await createResponse(responseData);
+    // const response = await createResponse(responseData);
   };
 
   const answersHasTexts = checkboxResponse.some(

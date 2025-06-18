@@ -28,8 +28,8 @@ export default function AdminDropDown({
     <DropdownMenu>
       <DropdownMenuTrigger className="relative" asChild>
         <Avatar
-          className={`h-9 w-9 ml-4 cursor-pointer ${
-            title && "fixed top-16 right-2"
+          className={`h-9 w-9 ml-4 cursor-pointer mr-4 ${
+            title //&& "fixed top-16 right-2"
           }`}
         >
           {/* <AvatarImage alt="@shadcn" src={session.user?.image as string} /> */}

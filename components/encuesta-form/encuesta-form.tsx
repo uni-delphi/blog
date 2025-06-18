@@ -2,7 +2,7 @@ import React from "react";
 import { User } from "next-auth";
 import Link from "next/link";
 
-import { getSampleRespuestasByEnunciado } from "@/lib/actions";
+// import { getSampleRespuestasByEnunciado } from "@/lib/actions";
 import { IDATATYPE, IENUNCIADO, IQUESTION } from "@/types/encuestas";
 
 import { Button } from "@/components/ui/button";
@@ -215,22 +215,22 @@ export default async function EncuestaForm({
   enunciado: IENUNCIADO;
   user: User;
 }) {
-  const singleChoice = await getSampleRespuestasByEnunciado(
-    enunciado.id,
-    user.id,
-    "SINGLE_CHOICE"
-  );
-  const checkbox = await getSampleRespuestasByEnunciado(
-    enunciado.id,
-    user.id,
-    "CHECKBOX"
-  );
+  // const singleChoice = await getSampleRespuestasByEnunciado(
+  //   enunciado.id,
+  //   user.id,
+  //   "SINGLE_CHOICE"
+  // );
+  // const checkbox = await getSampleRespuestasByEnunciado(
+  //   enunciado.id,
+  //   user.id,
+  //   "CHECKBOX"
+  // );
 
   const { questions, ...props } = enunciado;
 
   return (
     <>
-      {questions &&
+      {/* {questions &&
         questions.map((question: IQUESTION) =>
           question.type === "SINGLE_CHOICE" ? (
             <QuestionRadioField
@@ -251,7 +251,7 @@ export default async function EncuestaForm({
               checkboxResponse={checkbox}
             />
           )
-        )}
+        )} */}
       
     </>
   );

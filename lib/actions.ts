@@ -7,8 +7,12 @@ import bcrypt from "bcrypt";
 import { TUser, TLoginUser } from "@/types/user";
 
 import * as Users from "@/lib/api/users";
-import * as Encuestas from "@/lib/api/encuestas";
-import * as Respuestas from "@/lib/api/respuestas";
+import * as Categoria from "@/lib/api/categories";
+import * as Posts from "@/lib/api/posts";
+
+import {
+  Post as PostDbType,
+} from '@prisma/client';
 
 export async function createUser(data: TUser) {
   let user = null;
@@ -46,9 +50,9 @@ export async function loginUser(data: TLoginUser) {
   revalidatePath("/dashboard");
 }
 
-export async function getAllEncuestas(userId: string) {
+export async function getAllPostsByUserId(userId: string) {
   try {
-    const response = await Encuestas.getAllEncuestas(userId);
+    const response = await Posts.getPostsByUserId(userId);
     return response;
   } catch (error: any) {
     console.log(error);
@@ -56,9 +60,19 @@ export async function getAllEncuestas(userId: string) {
   }
 }
 
-export async function getEncuesta() {
+export async function getAllPostBySlug(slug: string) {
   try {
-    const response = await Encuestas.getEncuesta();
+    const response = await Posts.getPostBySlug(slug);
+    return response;
+  } catch (error: any) {
+    console.log(error);
+    throw Error("Error getAllEncuestas", error);
+  }
+}
+
+export async function getAllPosts() {
+  try {
+    const response = await Posts.getPosts();
     return response;
   } catch (error: any) {
     console.log(error);
@@ -68,147 +82,45 @@ export async function getEncuesta() {
 
 export async function getAllEncuestasInfo() {
   try {
-    return await Encuestas.getEncuestaInfo();
+    return await Posts.getEncuestaInfo();
   } catch (error: any) {
     console.log(error);
     throw Error("Error getAllEncuestas", error);
   }
 }
 
-export async function getTecnologia(title: string) {
+export async function createPost(data: PostDbType) {
   try {
-    return await Encuestas.getTecnologia(title);
-  } catch (error: any) {
-    console.log(error);
-    throw Error("Error getTecnologia", error);
-  }
-}
-
-export async function getEnunciado({
-  dataSlug,
-  dataUserId,
-  dataEnunciadoId,
-}: {
-  dataSlug: string;
-  dataUserId: string;
-  dataEnunciadoId: string;
-}) {
-  try {
-    return await Encuestas.getEnunciado({
-      dataSlug,
-      dataUserId,
-      dataEnunciadoId,
-    });
-  } catch (error: any) {
-    console.log(error);
-    throw Error("Error getTecnologia", error);
-  }
-}
-
-export async function getSampleRespuestasByEnunciado(enunciadosId: number, respondentId: string, responseType: any){
-  try {
-    return await Respuestas.getSampleRespuestasByEnunciado(enunciadosId, respondentId , responseType);
-  } catch (error: any) {
-    console.log(error);
-    throw Error("Error getTecnologia", error);
-  }
-}
-
-export async function getExampleResponses(enunciadosId: number) {
-  try {
-    return await Encuestas.getExampleResponses(enunciadosId);
-  } catch (error: any) {
-    console.log(error);
-    throw Error("Error getTecnologia", error);
-  }
-}
-
-export async function createResponse(data: any) {
-  try {
-    const response = await Respuestas.createResponse(data);
-    revalidatePath('/')
-    return response;
+    return await Posts.createPost(data);    
   } catch (error) {
-    console.log("Error creando el createResponse:", error);
-    throw new Error("Error creando el createResponse");
-  }  
-  revalidatePath("/impresoras-3d/enunciado-sobre-impresoras-3d-de-plasticoas");
+    console.log("Error creando el post:", error);
+    throw new Error("Error creando el post");
+  }
 }
 
-export async function updateSingleChoiceResponse(data: any, responseId: number) {
+export async function updatePost(id: string, data: PostDbType) {
   try {
-    const response = await Respuestas.updateSingleChoiceResponse(responseId, data);
-    revalidatePath('/')
-    return response;
+    const response = await Posts.updatePost(id, data);
+    if (response) {
+      revalidatePath("/admin");
+      revalidatePath("/admin/editar/" + data.slug);
+      return response;
+    }
   } catch (error) {
-    console.log("Error editando el updateSingleChoiceResponse:", error);
-    throw new Error("Error editando el updateSingleChoiceResponse");
+    console.log("Error actualizando el post:", error);
+    throw new Error("Error actualizando el post");
   }
 }
 
-export async function updateCheckboxResponse(data: any, responseId: number) {
+export async function deletesPost(id: string) {
   try {
-    const response = await Respuestas.updateCheckboxResponse(responseId, data);
-    revalidatePath('/')
-    return response;
+    const response = await Posts.deletePost(id);
+    if (response) {
+      revalidatePath("/admin");
+      return response;
+    }
   } catch (error) {
-    console.log("Error editando el updateCheckboxResponse:", error);
-    throw new Error("Error editando el updateCheckboxResponse");
-  }
-}
-
-export async function getResponsesForCSV() {
-  try {
-    return await Respuestas.getResponsesForCSV();
-  } catch (error: any) {
-    console.log(error);
-    throw Error("Error getResponsesForCSV", error);
-  }
-}
-
-export async function getAllMyResponses(userId: string) {
-  try {
-    return await Respuestas.getAllMyResponses(userId);
-  } catch (error: any) {
-    console.log(error);
-    throw Error("Error getAllMyResponses", error);
-  }
-}
-
-export async function getAllEnunciados() {
-  try {
-    return await Encuestas.getAllEnunciados();
-  } catch (error: any) {
-    console.log(error);
-    throw Error("Error getAllEnunciados", error);
-  }
-}
-
-export async function getAllUsers() {
-  try {
-    return await Users.getAllUsers();
-  } catch (error: any) {
-    console.log(error);
-    throw Error("Error getAllEnunciados", error);
-  }
-}
-
-export async function updateEncuesta(surveyId: number, data: any) {
-  try {
-    const response =  await Encuestas.updateEncuesta(surveyId, data);
-    revalidatePath('/');
-    return response;
-  } catch (error: any) {
-    console.log(error);
-    throw Error("Error getTecnologia", error);
-  }
-}
-
-export async function getSlugs() {
-  try {
-    return await Encuestas.getSlugs();
-  } catch (error: any) {
-    console.log(error);
-    throw Error("Error getSlugs", error);
+    console.log("Error eliminando el post:", error);
+    throw new Error("Error eliminando el post");
   }
 }

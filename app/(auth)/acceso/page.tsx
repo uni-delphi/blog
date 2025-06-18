@@ -19,8 +19,8 @@ export default async function LogIn() {
 
   return (
     <main>
-      <LayoutDefault>
-        <h2 className="font-bold text-2xl mt-10 pb-4 w-[80%] mx-auto">
+      <div className="container mx-auto mt-12 md:mt-16 md:max-w-[70vw] ">
+        <h2 className="font-bold text-2xl mt-10 pb-4 mx-auto">
           ¿Es tu primera vez en la plataforma? ¡Regístrate aquí!
         </h2>
         <div className="md:flex justify-center my-4 gap-4">
@@ -35,11 +35,12 @@ export default async function LogIn() {
           </Link>
         </div>
         <hr className="w-full position-absolute" />
-        <div className="mt-10">
+        <div className="mt-10 text-center">
           <h2 className="font-bold text-2xl my-4 pb-4">Ingresar</h2>
-          <LogInForm />
+          {/* <LogInForm /> */}
+          <GoogleLoginButton />
         </div>
-      </LayoutDefault>
+      </div>
     </main>
   );
 }
