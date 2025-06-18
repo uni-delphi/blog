@@ -11,146 +11,48 @@ datasource db {
   //directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
+model Blog {
+  id          String      @id @default(uuid())
+  bloggers    User[]
+  posts       Post[]
+  categorias  Categoria[]
+}
+
 // Modelo para representar una encuesta
-model Survey {
-  id            Int           @id @default(autoincrement())
-  title         String
-  description   String?
+model Post {
+  id            String        @id @default(uuid())
+  titulo        String
+  bajada        String?
+  cuerpo        String?
+  imagen        String?
+  slug          String?       @unique
   createdBy     User          @relation(fields: [createdById], references: [id])
   createdById   String
+
+  categoria     Categoria     @relation(fields: [categoriaId], references: [id])
+  categoriaId   String
+
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
-  tecnologias   Tecnologias[]
-  responseCount Int           @default(0) // New field to track the number of responses
+  
   isActive      Boolean       @default(true)
   hasEnded      Boolean       @default(false)
   endDate       DateTime
+
+  Blog          Blog[]
 }
 
-model Tecnologias {
-  id          Int          @id @default(autoincrement())
+model Categoria {
+  id          String        @id @default(uuid())
   title       String
   description String
-  slug        String?      @unique
-  enunciados  Enunciados[]
-  survey      Survey       @relation(fields: [surveyId], references: [id])
-  surveyId    Int
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-}
+  slug        String?       @unique  
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 
-model Enunciados {
-  id                   Int                    @id @default(autoincrement())
-  title                String
-  description          String
-  slug                 String?                @unique
-  questionsEnunciados  QuestionEnunciado[] // Relación many-to-many con Question
-  tecnologia           Tecnologias            @relation(fields: [tecnologiaId], references: [id])
-  tecnologiaId         Int
-  questions            Question[]
-  response             Response[]
-  createdAt            DateTime               @default(now())
-  updatedAt            DateTime               @updatedAt
-  SingleChoiceResponse SingleChoiceResponse[]
-  CheckboxResponse     CheckboxResponse?
-}
+  Blog        Blog[]
 
-// Tabla intermedia para la relación many-to-many entre Question y Enunciado
-model QuestionEnunciado {
-  enunciado   Enunciados @relation(fields: [enunciadoId], references: [id])
-  enunciadoId Int
-
-  question   Question @relation(fields: [questionId], references: [id])
-  questionId Int
-
-  @@id([enunciadoId, questionId])
-}
-
-// Modelo para representar una pregunta
-model Question {
-  id                    Int                    @id @default(autoincrement())
-  text                  String
-  type                  QuestionType
-  inputType             InputQuestionType?
-  additionalInfo        String?
-  enunciados            Enunciados[] // Relación many-to-many con Enunciados
-  createdAt             DateTime               @default(now())
-  updatedAt             DateTime               @updatedAt
-  responses             Response[]
-  singleChoiceResponses SingleChoiceResponse[]
-  checkboxResponses     CheckboxResponse[]
-  questionEnunciados    QuestionEnunciado[] // Relación inversa con QuestionEnunciado
-}
-
-// Enum para definir los tipos de preguntas posibles
-enum QuestionType {
-  CHECKBOX
-  SINGLE_CHOICE
-}
-
-enum InputQuestionType {
-  NIVEL
-  IMPORTANCIA
-  DIFUSION
-  ACELERAN
-  FRENAN
-  IMPACTO
-  DIFUSION_2024
-  DIFUSION_2027
-  DIFUSION_2030
-}
-
-// Modelo para representar una respuesta a una pregunta
-model Response {
-  id             Int                   @id @default(autoincrement())
-  respondent     User                  @relation(fields: [respondentId], references: [id])
-  respondentId   String
-  question       Question?             @relation(fields: [questionId], references: [id])
-  questionId     Int?
-  enunciados     Enunciados            @relation(fields: [enunciadosId], references: [id])
-  enunciadosId   Int
-  answer         String // You may adjust this based on the type of answers expected
-  responseType   ResponseType // New field to specify the type of response
-  singleChoice   SingleChoiceResponse?
-  singleChoiceId Int?
-  checkbox       CheckboxResponse?
-  checkboxId     Int?
-  createdAt      DateTime              @default(now())
-  updatedAt      DateTime              @updatedAt
-}
-
-// Enum to define the types of responses
-enum ResponseType {
-  SINGLE_CHOICE
-  CHECKBOX
-}
-
-// Modelo para representar una respuesta a una pregunta de opción única (radio button)
-model SingleChoiceResponse {
-  id           Int         @id @default(autoincrement())
-  question     Question    @relation(fields: [questionId], references: [id])
-  questionId   Int
-  choice       String
-  createdAt    DateTime    @default(now())
-  answer       String
-  response     Response?   @relation(fields: [responseId], references: [id])
-  responseId   Int?        @unique
-  enunciados   Enunciados? @relation(fields: [enunciadosId], references: [id])
-  enunciadosId Int?        @unique
-}
-
-// Modelo para representar una respuesta a una pregunta de selección múltiple (checkbox)
-model CheckboxResponse {
-  id           Int         @id @default(autoincrement())
-  question     Question    @relation(fields: [questionId], references: [id])
-  questionId   Int
-  choices      String[]
-  createdAt    DateTime    @default(now())
-  answer       String
-  response     Response?   @relation(fields: [responseId], references: [id])
-  responseId   Int?        @unique
-  enunciados   Enunciados? @relation(fields: [enunciadosId], references: [id])
-  enunciadosId Int?        @unique
+  Post        Post[]
 }
 
 model User {
@@ -169,21 +71,21 @@ model User {
   createdat          DateTime             @default(now())
   updatedAt          DateTime             @updatedAt
   role               RoleType             @default(USER)
+
   accounts           Account[]
   sessions           Session[]
-  createdSurveys     Survey[] // Relación inversa para las encuestas creadas por el administrador
-  responses          Response[] // Add this line to establish the relation with responses
+  posts              Post[] // Relación inversa para las encuestas creadas por el administrador
   passwordReserToken PasswordReserToken[]
-  //singleChoiceResponses SingleChoiceResponse[] // Add this line to establish the relation with single choice responses
-  //checkboxResponses     CheckboxResponse[] // Add this line to establish the relation with checkbox responses
+
+  Blog Blog[]
 }
 
 model PasswordReserToken {
-  id        Int       @id @default(autoincrement())
-  token     String    @unique
-  createdAt DateTime  @default(now())
+  id        String      @id @default(uuid())
+  token     String      @unique
+  createdAt DateTime    @default(now())
   resetAt   DateTime?
-  user      User      @relation(fields: [userId], references: [id])
+  user      User        @relation(fields: [userId], references: [id])
   userId    String
 }
 
@@ -220,7 +122,7 @@ model Session {
 }
 
 model VerificationToken {
-  id         Int      @id @default(autoincrement())
+  id         String      @id @default(uuid())
   identifier String
   token      String   @unique
   expires    DateTime

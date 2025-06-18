@@ -1,5 +1,5 @@
-export const SITE_NAME = `Delphi - Campus Norte UNC`;
-export const SITE_DESCRPTION = `Herramienta desarrollada por Campus Norte UNC que utiliza el modelo SENAI de Prospectiva Ocupacional para anticipar los efectos de tecnologías emergentes en el trabajo y la formación.`;
+export const SITE_NAME = `Épica Rosario`;
+export const SITE_DESCRPTION = `Información y mucho más.`;
 export const SITE_LANG = "es";
 export const SITE_URL =
   (process.env.NEXT_PUBLIC_SITE_URL?.startsWith("https://")
