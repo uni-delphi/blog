@@ -38,6 +38,7 @@ import ImageUploadButton from "./CldUploadButton";
 import { CldImage } from "next-cloudinary";
 import { updatePost } from "@/lib/actions";
 import { toast } from "./ui/use-toast";
+import RichTextEditor from "./RichTextEditor";
 // import { createResponse, updateCheckboxResponse } from "@/lib/actions";
 
 const formSchema = z.object({
@@ -232,13 +233,14 @@ export default function FormEditPost({
                     <FormItem className="mx-auto">
                       <FormLabel>Cuerpo</FormLabel>
                       <FormControl>
-                        <Textarea
+                        {/* <Textarea
                           {...field}
                           placeholder="Escribe aquí el contenido del post..."
                           className="mt-2"
                           value={field.value}
                           onChange={handleTextChange}
-                        />
+                        /> */}
+                        <RichTextEditor content={field.value} onChange={field.onChange} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

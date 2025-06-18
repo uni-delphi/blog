@@ -25,7 +25,7 @@ export default async function Dashboard() {
   if (!session || !session.user) redirect("/");
   const data = await getCachedEncuesta();
   return (
-    <main className="mt-10 container mx-auto">
+    <main className="my-10 container mx-auto">
       <section className="">
         <div className="grid grid-cols-12 gap-4">
           {data.map((article, index) => {

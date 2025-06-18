@@ -71,8 +71,9 @@ export async function getPostBySlug(slug: string) {
 export async function getPosts() {
   return await db.post.findMany({
     orderBy: {
-      id: "asc",
-    }
+      createdAt: "desc",
+    },
+
   });
 }
 
@@ -108,5 +109,13 @@ export async function updatePost(postId: string, data: any) {
       id: postId,
     },
     data,
+  });
+}
+
+export async function deletePost(postId: string) {
+  return await db.post.delete({
+    where: {
+      id: postId,
+    },
   });
 }

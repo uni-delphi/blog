@@ -26,22 +26,21 @@ type ArticleCardProps = {
 };
 
 export default function ArticleBigCard({ article }: any) {
-  console.log("🚀 ~ ArticleBigCard ~ article:", article);
-
+  
   return (
     <article className="col-span-1 md:col-span-3 block">
       <Link
         href={`/${article?.slug}`}
-        className="flex flex-col md:flex-row gap-2"
+        className="flex flex-col md:flex-row gap-4"
       >
-        <div className="w-full md:w-2/5 aspect-square overflow-hidden relative font-serif bg-white">
+        <div className="w-full md:w-2/5 aspect-square overflow-hidden relative font-serif bg-white rounded-lg">
           <CldImage
             src={
               article.imagen ||
               "https://res.cloudinary.com/dxvxzikri/image/upload/c_thumb,w_200,g_face/v1695419795/typy1gob56motmzkatzc.webp"
             }
             alt="Imagen principal del artículo"
-            className="w-full h-full object-cover object-center rounded-lg"
+            className="w-full h-full object-cover object-center"
             width={500}
             height={500}
             loading="lazy"

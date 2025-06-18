@@ -111,3 +111,16 @@ export async function updatePost(id: string, data: PostDbType) {
     throw new Error("Error actualizando el post");
   }
 }
+
+export async function deletesPost(id: string) {
+  try {
+    const response = await Posts.deletePost(id);
+    if (response) {
+      revalidatePath("/admin");
+      return response;
+    }
+  } catch (error) {
+    console.log("Error eliminando el post:", error);
+    throw new Error("Error eliminando el post");
+  }
+}

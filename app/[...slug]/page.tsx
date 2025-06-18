@@ -25,7 +25,7 @@ export default async function Post({ params }: { params: { slug: string[] } }) {
   return (
     <>
       <Header />
-      <main className="relative container mx-auto mt-16 md:mt-20">
+      <main className="relative container mx-auto mt-20 md:mt-24">
         <PostArticle article={data} />
       </main>
     </>

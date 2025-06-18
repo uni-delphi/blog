@@ -6,6 +6,7 @@ import { FC, useEffect, useRef } from "react";
 import { NavItem } from "./item";
 //import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 type Props = {
   open?: boolean;
@@ -81,14 +82,15 @@ export const Menu: FC<Props> = ({ open = false, items = [], data = {} }) => {
           ))}
         </div>
       </div>
-      <div className="relative overflow-hidden col-span-12 md:col-span-6 aspect-video max-h-[66vh]">
-        {/* <PrismicNextImage
-          height={imagen.dimensions?.height}
-          width={imagen.dimensions?.width}
-          field={imagen}
+      <div className="relative overflow-hidden col-span-12 md:col-span-6">
+        <Image
+          height={500}
+          width={500}
+          src={'/logo.png'}
+          alt="Imagen de fondo del menú"
           loading="eager"
           className="w-full h-full object-cover object-center"
-        /> */}
+        />
         <p className="text-4xl text-beige font-serif font-light absolute p-5 left-0 bottom-0 z-[22] max-w-[50%] text-balance">
           {slogan}
         </p>
