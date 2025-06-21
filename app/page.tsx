@@ -123,10 +123,10 @@ export async function generateMetadata(): Promise<Metadata> {
     title: data?.titulo || SITE_NAME,
     description: data?.bajada || SITE_DESCRPTION,
     openGraph: {
-      title: SITE_NAME,
-      description: SITE_DESCRPTION,
+      title: data?.titulo || SITE_NAME,
+      description: data?.bajada || SITE_DESCRPTION,
       images: data?.imagen
-        ? [data?.imagen]
+        ? data?.imagen
         : undefined,
     },
   };
