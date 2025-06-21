@@ -8,9 +8,9 @@ import { Metadata } from "next/types";
 import { SITE_DESCRPTION, SITE_NAME } from "@/lib/constants";
 import { Header } from "@/components/Header";
 import { asImageSrc, isFilled } from "@/utils/metada-helper";
+import Footer from "@/components/footer";
 
 const getCachedEncuesta = cache(async (techSlug: string) => {
-  console.log("cache");
   return await getAllPostBySlug(techSlug);
 });
 
@@ -29,6 +29,7 @@ export default async function Post({ params }: { params: { slug: string[] } }) {
       <main className="relative container mx-auto mt-20 md:mt-24">
         <PostArticle article={data} />
       </main>
+      <Footer />
     </>
   );
 }
@@ -40,7 +41,6 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const [techSlug] = params.slug;
   const data: any = await getCachedEncuesta(techSlug);
-  console.log("🚀 ~ data:", data)
 
   return {
     title: data?.titulo || SITE_NAME,

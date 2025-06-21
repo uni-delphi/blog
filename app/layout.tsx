@@ -16,7 +16,7 @@ import {
 } from "@/lib/constants";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Header } from "@/components/Header";
-import Footer from "@/components/footer";
+
 // import { Analytics } from "@vercel/analytics/react"
 // import { SpeedInsights } from "@vercel/speed-insights/next"
 
@@ -57,7 +57,7 @@ export default async function RootLayout({
         <Toaster />
         {/* <Analytics/>
         <SpeedInsights/> */}
-        <Footer />
+        
       </body>
     </html>
   );
