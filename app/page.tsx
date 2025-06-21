@@ -23,6 +23,7 @@ import { Header } from "@/components/Header";
 import { CldImage } from "next-cloudinary";
 import Image from "next/image";
 import ArticleDate from "@/components/ArticleDate";
+import Footer from "@/components/footer";
 
 type PageMetaParams = {
   data?: {
@@ -113,6 +114,7 @@ export default async function Home({ searchParams }: any) {
           </div>
         </section>
       </main>
+      <Footer />
     </>
   );
 }

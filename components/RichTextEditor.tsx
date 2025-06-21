@@ -242,6 +242,7 @@ const RichTextEditor = ({
   const editor = useEditor({
     extensions,
     content,
+    immediatelyRender: false,
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML());
     },
