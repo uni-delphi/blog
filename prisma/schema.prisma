@@ -30,7 +30,7 @@ model Post {
   createdById   String
 
   categoria     Categoria     @relation(fields: [categoriaId], references: [id])
-  categoriaId   String
+  categoriaId   String        @default("57f8ff1f-5f9e-4fec-b5de-ab9d6aca32bc") // Default value for the category
 
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt

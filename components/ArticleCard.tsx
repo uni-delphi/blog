@@ -55,10 +55,10 @@ export default function ArticleCard({ article }: any) {
           <p className="hidden text-sm text-white font-light leading-snug text-balance">
             {article.bajada}
           </p>
-          {/* <ArticleDate
+          <ArticleDate
             style="text-sm text-white font-light text-xs text-right"
-            date={article.first_publication_date}
-          /> */}
+            date={article.createdAt}
+          />
         </div>
       </Link>
     </article>

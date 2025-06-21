@@ -80,12 +80,12 @@ export async function getAllPosts() {
   }
 }
 
-export async function getAllEncuestasInfo() {
+export async function getAllCategorias() {
   try {
-    return await Posts.getEncuestaInfo();
+    return await Categoria.getAllCategorias();
   } catch (error: any) {
     console.log(error);
-    throw Error("Error getAllEncuestas", error);
+    throw Error("Error getAllCategorias", error);
   }
 }
 

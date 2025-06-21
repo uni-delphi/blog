@@ -1,10 +1,6 @@
 import { db } from "../prisma";
 
-export async function getSampleRespuestasByEnunciado(
-  enunciadosId: number,
-  respondentId: string,
-  responseType: any
-) {
+export async function getAllCategorias() {
   return await db.categoria.findMany({
     // where: {
     //   enunciadosId,
@@ -18,9 +14,8 @@ export async function getSampleRespuestasByEnunciado(
     //   checkbox: true,
     // },
     orderBy: {
-      id: "desc",
-    },
-    take: 15, // Limita a 5 respuestas de single choice por pregunta
+      title: "asc",
+    }
   });
 }
 

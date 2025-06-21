@@ -22,6 +22,7 @@ import ArticleHomeCard from "@/components/ArticleHomeCard";
 import { Header } from "@/components/Header";
 import { CldImage } from "next-cloudinary";
 import Image from "next/image";
+import ArticleDate from "@/components/ArticleDate";
 
 type PageMetaParams = {
   data?: {
@@ -95,10 +96,10 @@ export default async function Home({ searchParams }: any) {
                           <p className="text-sm text-black font-light leading-snug text-pretty">
                             {article.bajada}
                           </p>
-                          {/* <ArticleDate
+                          <ArticleDate
                             style="text-sm text-white font-light text-xs text-right"
-                            date={article.first_publication_date}
-                          /> */}
+                            date={article.createdAt}
+                          />
                         </div>
                       </Link>
                     </article>
@@ -124,9 +125,9 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: SITE_NAME,
       description: SITE_DESCRPTION,
-      // images: isFilled(page.data?.meta_image)
-      //   ? [asImageSrc(page.data?.meta_image)]
-      //   : undefined,
+      images: data?.imagen
+        ? [data?.imagen]
+        : undefined,
     },
   };
 }

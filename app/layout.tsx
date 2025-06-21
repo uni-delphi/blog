@@ -16,6 +16,7 @@ import {
 } from "@/lib/constants";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Header } from "@/components/Header";
+import Footer from "@/components/footer";
 // import { Analytics } from "@vercel/analytics/react"
 // import { SpeedInsights } from "@vercel/speed-insights/next"
 
@@ -47,8 +48,7 @@ export default async function RootLayout({
   return (
     <html lang={SITE_LANG}>
       <body className={inter.className}>
-        <SessionProvider session={session}>
-          
+        <SessionProvider session={session}>          
           {children}
         </SessionProvider>
         {IS_PROD && GOOGLE_ANALYTICS_ID && (
@@ -57,6 +57,7 @@ export default async function RootLayout({
         <Toaster />
         {/* <Analytics/>
         <SpeedInsights/> */}
+        <Footer />
       </body>
     </html>
   );

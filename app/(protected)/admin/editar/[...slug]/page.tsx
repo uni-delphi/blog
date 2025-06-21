@@ -2,7 +2,7 @@
 
 import { authOptions } from "@/auth.config";
 import { getServerSession } from "next-auth";
-import { getAllPostBySlug } from "@/lib/actions";
+import { getAllCategorias, getAllPostBySlug } from "@/lib/actions";
 import { redirect } from "next/navigation";
 import { cache } from "react";
 import EditPostClient from "@/components/EditPostClient";
@@ -24,6 +24,7 @@ export default async function EditPost({
   const { user } = session;
   const [techSlug] = params.slug;
   const data = await getCachedEncuesta(techSlug);
+  const categorias = await getAllCategorias();
 
   return (
     <main className="container mb-10 mx-auto">
@@ -35,7 +36,7 @@ export default async function EditPost({
           </Link>
         </Button>
       </div>
-      <EditPostClient user={user} data={data} />
+      <EditPostClient user={user} data={data} categorias={categorias} />
     </main>
   );
 }
