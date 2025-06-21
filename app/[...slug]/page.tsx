@@ -49,7 +49,7 @@ export async function generateMetadata({
       title: data?.titulo || SITE_NAME,
       description: data?.bajada || SITE_DESCRPTION,
       images: data?.imagen
-        ? [data?.imagen]
+        ? data?.imagen
         : undefined,
     },
   };
