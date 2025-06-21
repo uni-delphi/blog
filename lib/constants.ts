@@ -1,3 +1,5 @@
+import { X } from "lucide-react";
+
 export const SITE_NAME = `Épica Rosario`;
 export const SITE_DESCRPTION = `Información y mucho más.`;
 export const SITE_LANG = "es";
@@ -17,3 +19,16 @@ export const GOOGLE_ANALYTICS_ID =
   process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || "";
 
 export const ENABLE_PAGE_TRANSITIONS = false;
+
+export const PAGE_INFO = {
+  redes: {
+    facebook: "https://www.facebook.com/epicarosario",
+    instagram: "https://www.instagram.com/epicarosario",
+    twitter: "https://twitter.com/epicarosario",
+    tiktok: "https://www.tiktok.com/@epicarosario",
+    X: "https://x.com/epicarosario",
+    whatsapp: "https://wa.me/5493415555555",
+    telegram: "https://t.me/epicarosario",
+  },
+  email: "asd@asd.com",
+};

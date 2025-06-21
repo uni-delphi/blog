@@ -6,9 +6,9 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
-  //url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  //directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  //url      = env("DATABASE_URL")
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model Blog {
@@ -30,7 +30,7 @@ model Post {
   createdById   String
 
   categoria     Categoria     @relation(fields: [categoriaId], references: [id])
-  categoriaId   String
+  categoriaId   String        @default("57f8ff1f-5f9e-4fec-b5de-ab9d6aca32bc") // Default value for the category
 
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt

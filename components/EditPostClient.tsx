@@ -12,15 +12,19 @@ import { useRouter } from "next/navigation";
 type Props = {
   user: User;
   data: any;
+  categorias: any;
 };
 
-export default function EditPostClient({ user, data }: Props) {
+export default function EditPostClient({ user, data, categorias }: Props) {
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
+  if( !data || !data.id || !data.titulo ) {
+    return null;
+  }
 
-  const deletePost = async (id: string) => {
+  const deletePost = async () => {
     try {
-      const response = await deletesPost(id);
+      const response = await deletesPost(data.id);
       if (response) {
         toast({
           title: "Post eliminado",
@@ -38,7 +42,7 @@ export default function EditPostClient({ user, data }: Props) {
   return (
     <div>
       <section>
-        <FormEditPost user={user} data={data} />
+        <FormEditPost user={user} data={data} categorias={categorias} />
       </section>
 
       <section className="mt-6">

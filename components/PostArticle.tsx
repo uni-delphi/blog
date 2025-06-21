@@ -8,6 +8,14 @@ import { CldImage } from "next-cloudinary";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 
+const redesSociales: string[] = [
+  'Whatsapp',
+  'Facebook',
+  'X',
+  'Instagram',
+  'Telegram',
+];
+
 function PostArticle({ article }: any) {
   const [htmlOutput, setHtmlOutput] = useState("");
 
@@ -49,11 +57,11 @@ function PostArticle({ article }: any) {
               <p className="text-md md:text-xl ">{article?.bajada}</p>
             </div>
             <div className="flex justify-between items-center border-b-1 border-gray-300 pb-4">
-              {/* <ArticleSocialButtons
-                redes={redesSociales.data.redes_sociales}
-                pageUrl={url as string}
-              /> */}
-              {/* <ArticleDate date={pageDate!} /> */}
+              <ArticleSocialButtons
+                redes={redesSociales}
+                pageUrl={article.slug}
+              />
+              <ArticleDate date={article.createdAt!} style="text-gray-600"/>
             </div>
           </div>
         </div>

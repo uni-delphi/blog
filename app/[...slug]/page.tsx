@@ -7,6 +7,7 @@ import { cache } from "react";
 import { Metadata } from "next/types";
 import { SITE_DESCRPTION, SITE_NAME } from "@/lib/constants";
 import { Header } from "@/components/Header";
+import { asImageSrc, isFilled } from "@/utils/metada-helper";
 
 const getCachedEncuesta = cache(async (techSlug: string) => {
   console.log("cache");
@@ -46,9 +47,9 @@ export async function generateMetadata({
     openGraph: {
       title: SITE_NAME,
       description: SITE_DESCRPTION,
-      // images: isFilled(page.data?.meta_image)
-      //   ? [asImageSrc(page.data?.meta_image)]
-      //   : undefined,
+      images: data?.imagen
+        ? [data?.imagen]
+        : undefined,
     },
   };
 }

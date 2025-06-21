@@ -50,7 +50,7 @@ const socialOptions: any = {
   },
   X: {
     url: (url: string) =>
-      `https://x.com/intent/post?url=${SITE_URL}/${encodeURIComponent(url)}`,
+      `${SITE_URL}/${encodeURIComponent(url)}`,
     Button: TwitterShareButton, // react-share aún usa `TwitterShareButton`
     icon: (
       <svg
@@ -128,11 +128,11 @@ function ArticleSocialButtons({
 }: {
   redes: any[];
   pageUrl: string;
-}) {
+}) {  
   return (
     <div className="flex gap-2">
       {redes.map((key: any) => {
-        const social = socialOptions[key.enlace.text.toUpperCase()];
+        const social = socialOptions[key.toUpperCase()];
         if (!social) return null;
 
         const shareUrl = social.url(pageUrl);
@@ -141,7 +141,7 @@ function ArticleSocialButtons({
         if (typeof Button === "string") {
           return (
             <a
-              key={key.enlace.text}
+              key={key}
               href={shareUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -154,7 +154,7 @@ function ArticleSocialButtons({
 
         return (
           <Button
-            key={key.enlace.text}
+            key={key}
             url={shareUrl}
             className="p-2 rounded hover:bg-gray-100 transition"
           >
