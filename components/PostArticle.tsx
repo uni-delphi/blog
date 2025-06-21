@@ -22,6 +22,7 @@ function PostArticle({ article }: any) {
   const editor = useEditor({
     extensions: [StarterKit],
     content: article?.cuerpo || "",
+    immediatelyRender: false,
   });
 
   useEffect(() => {
