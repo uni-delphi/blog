@@ -30,7 +30,7 @@ export default function ArticleCard({ article }: any) {
   return (
     <article className="col-span-1 block px-4 md:px-0">
       <Link
-        href={`/${article.slug}`}
+        href={`/${article?.slug}`}
         className="flex flex-row md:flex-col gap-4"
       >
         <div className="w-1/5 md:w-full font-serif w-full">
@@ -57,7 +57,7 @@ export default function ArticleCard({ article }: any) {
           </p>
           <ArticleDate
             style="text-sm text-white font-light text-xs text-right"
-            date={article.createdAt}
+            date={article?.createdAt}
           />
         </div>
       </Link>

@@ -31,7 +31,7 @@ export default async function Dashboard() {
           {data.map((article, index) => {
             return (
               <ArticleHomeCard key={article.id} style="h-full bg-white col-span-12 md:col-span-6 lg:col-span-4 border-2 border-black overflow-hidden text-black hover:border-[var(--magenta)] hover:text-[var(--magenta)] transition-all duration-300 ease-in-out">
-                <Link href={`/admin/editar/${article.slug}`} className="block h-full">
+                <Link href={`/admin/editar/${article?.slug}`} className="block h-full">
                   <article className="flex flex-col h-full">
                     <div className="font-serif">
                       <div className="aspect-square overflow-hidden relative bg-black">

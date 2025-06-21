@@ -50,7 +50,7 @@ export default function ArticleBigCard({ article }: any) {
           /> */}
         </div>
         <div className="w-full md:w-3/5 px-4 flex flex-col gap-4 font-serif">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-200 leading-tight text-pretty">
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-200 leading-tight text-pretty">
             {article.titulo}
           </h2>
           <p className="text-sm md:text-2xl text-white font-light leading-snug text-balance">
@@ -58,7 +58,7 @@ export default function ArticleBigCard({ article }: any) {
           </p>
           <ArticleDate
             style="text-sm text-white font-light text-xs text-right"
-            date={article.createdAt}
+            date={article?.createdAt}
           />
         </div>
       </Link>

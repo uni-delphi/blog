@@ -7,6 +7,7 @@ import ArticleDate from "./ArticleDate";
 import { CldImage } from "next-cloudinary";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import { Post } from "@prisma/client";
 
 const redesSociales: string[] = [
   'Whatsapp',
@@ -16,7 +17,7 @@ const redesSociales: string[] = [
   'Telegram',
 ];
 
-function PostArticle({ article }: any) {
+function PostArticle(article: Post) {
   const [htmlOutput, setHtmlOutput] = useState("");
 
   const editor = useEditor({
@@ -60,9 +61,9 @@ function PostArticle({ article }: any) {
             <div className="flex justify-between items-center border-b-1 border-gray-300 pb-4">
               <ArticleSocialButtons
                 redes={redesSociales}
-                pageUrl={article.slug}
+                pageUrl={article?.slug ?? ""}
               />
-              <ArticleDate date={article.createdAt!} style="text-gray-600"/>
+              <ArticleDate date={article?.createdAt ?? ""} style="text-gray-600"/>
             </div>
           </div>
         </div>

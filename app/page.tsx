@@ -69,7 +69,7 @@ export default async function Home({ searchParams }: any) {
                   <ArticleHomeCard key={article.id} style="h-full bg-white col-span-2 overflow-hidden text-black hover:border-[var(--magenta)] hover:text-[var(--magenta)] transition-all duration-300 ease-in-out">
                     <article className="col-span-2 block">
                       <Link
-                        href={`/${article.slug}`}
+                        href={`/${article?.slug}`}
                         className="flex flex-col gap-4"
                       >
                         <div className="w-5/5 font-serif w-full">
@@ -99,7 +99,7 @@ export default async function Home({ searchParams }: any) {
                           </p>
                           <ArticleDate
                             style="text-sm text-white font-light text-xs text-right"
-                            date={article.createdAt}
+                            date={article?.createdAt}
                           />
                         </div>
                       </Link>
