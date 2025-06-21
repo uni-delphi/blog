@@ -40,13 +40,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const [techSlug] = params.slug;
   const data: any = await getCachedEncuesta(techSlug);
+  console.log("🚀 ~ data:", data)
 
   return {
     title: data?.titulo || SITE_NAME,
     description: data?.bajada || SITE_DESCRPTION,
     openGraph: {
-      title: SITE_NAME,
-      description: SITE_DESCRPTION,
+      title: data?.titulo || SITE_NAME,
+      description: data?.bajada || SITE_DESCRPTION,
       images: data?.imagen
         ? [data?.imagen]
         : undefined,
